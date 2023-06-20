@@ -5,7 +5,7 @@ body {
 }
 
 #side-nav{
-    background: #1c8454;
+    background: #1e1c84;
     min-width: 250px;
     max-width: 250px;
 }
@@ -25,7 +25,7 @@ hr.h-color{
 }
 
 .sidebar li.active a, .sidebar li.active a:hover{
-    color: #1c8454;
+    color: #1e1c84;
 }
 
 .sidebar li a{
@@ -34,5 +34,9 @@ hr.h-color{
 }
 
 .nav-link {
-    color:#1c8454
+    color:#1e1c84;
+}
+
+footer{
+    position: relative;
 }

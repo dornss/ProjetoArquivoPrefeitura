@@ -1,0 +1,51 @@
+{% extends 'paginas/modelo.html' %}
+{% load static %}
+
+
+{% block conteudo %}
+<h3>Lista de campos registrados</h3>
+<hr>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>Nome</th>
+            <th>Matrícula</th>
+            <th>CPF</th>
+            <th>Vínculo</th>
+            <th>Armário</th>
+            <th>Gaveta</th>
+            <th>Situação</th>
+            <th>Opções</th>
+        </tr>
+
+        {% for funcionario in object_list %}
+        <tr>
+            <td>{{ funcionario.nome }}</td>
+            <td>{{ funcionario.matricula }}</td>
+            <td>{{ funcionario.cpf }}</td>
+            <td>{{ funcionario.vinculo }}</td>
+            <td>{{ funcionario.armario }}</td>
+            <td>{{ funcionario.gaveta }}</td>
+            <td>
+                {% if funcionario.situacao %}
+                    Ativo
+                {% else %}
+                    Desligado
+                {% endif %}
+            </td>
+            <td>
+                <a href="{% url 'excluir-funcionario' funcionario.pk %}" class="btn btn-danger btn-sm" title="Excluir">X</a>
+            </td>
+        </tr>
+
+        {% empty %}
+
+        <tr>
+            <td colspan="8">Nenhum campo registrado</td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+</div>
+{% endblock %}

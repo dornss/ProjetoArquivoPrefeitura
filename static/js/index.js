@@ -1,4 +1,13 @@
-$(".sidebar ul li").on('click', function(){
+$(document).ready(function() {
+    var currentUrl = window.location.pathname;
+
     $(".sidebar ul li.active").removeClass('active');
-    $(this).addClass('active');
-})
+
+    $(".sidebar ul li").each(function() {
+        var linkUrl = $(this).find('a').attr('href');
+
+        if (currentUrl === linkUrl) {
+            $(this).addClass('active');
+        }
+    });
+});

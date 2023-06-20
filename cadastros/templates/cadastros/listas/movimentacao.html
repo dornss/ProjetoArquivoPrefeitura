@@ -1,0 +1,40 @@
+{% extends 'paginas/modelo.html' %}
+{% load static %}
+
+{% block conteudo %}
+<h3>Lista de movimentações registradas</h3>
+<hr>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>Funcionário</th>
+            <th>Amário</th>
+            <th>Gaveta</th>
+            <th>Setor</th>
+            <th>Data</th>
+            <th>Opções</th>
+        </tr>
+
+        {% for movimentacao in object_list %}
+        <tr>
+            <td> {{ movimentacao.funcionario.nome}}</td>
+            <td>{{ movimentacao.funcionario.armario }}</td>
+            <td>{{ movimentacao.funcionario.gaveta }}</td>
+            <td>{{ movimentacao.setor }}</td>
+            <td>{{ movimentacao.data }}</td>
+            <td>
+                <a href="{% url 'excluir-movimentacao' movimentacao.pk %}" class="btn btn-danger btn-sm" title="Rastrear"><i class="fa-solid fa-trash"></i></a>
+            </td>
+        </tr>
+
+        {% empty %}
+
+        <tr>
+            <td colspan="8">Nenhum campo registrado</td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+</div>
+{% endblock %}

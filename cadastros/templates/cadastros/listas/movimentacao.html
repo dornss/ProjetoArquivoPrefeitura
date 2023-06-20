@@ -16,12 +16,13 @@
         </tr>
 
         {% for movimentacao in object_list %}
+        
         <tr>
-            <td> {{ movimentacao.funcionario.nome}}</td>
+            <td>{{ movimentacao.funcionario.nome}}</td>
             <td>{{ movimentacao.funcionario.armario }}</td>
             <td>{{ movimentacao.funcionario.gaveta }}</td>
             <td>{{ movimentacao.setor }}</td>
-            <td>{{ movimentacao.data }}</td>
+            <td>{{ movimentacao.data|date }}</td>
             <td>
                 <a href="{% url 'excluir-movimentacao' movimentacao.pk %}" class="btn btn-danger btn-sm" title="Rastrear"><i class="fa-solid fa-trash"></i></a>
             </td>

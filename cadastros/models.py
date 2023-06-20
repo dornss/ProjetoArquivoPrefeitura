@@ -9,7 +9,7 @@ class Funcionario(models.Model):
     vinculo = models.CharField(max_length=12, verbose_name="Vínculo")
     armario = models.IntegerField(verbose_name="Armário")
     gaveta = models.IntegerField(verbose_name="Gaveta")
-    situacao = models.BooleanField(default=True)
+    situacao = models.BooleanField(default=True, verbose_name="Situação (Marcado = Ativo)")
     
     def __str__(self):
         return "{} ({})".format(self.nome, self.matricula)

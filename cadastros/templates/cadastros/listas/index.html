@@ -1,7 +1,6 @@
 {% extends 'paginas/modelo.html' %}
 {% load static %}
 
-
 {% block conteudo %}
 <h3>Lista de funcionários registrados</h3>
 <hr>
@@ -23,7 +22,7 @@
             <td>{{ funcionario.nome }}</td>
             <td>{{ funcionario.matricula }}</td>
             <td>{{ funcionario.cpf }}</td>
-            <td>{{ funcionario.vinculo }}</td>
+            <td>{{ funcionario.get_vinculo_display }}</td>
             <td>{{ funcionario.armario }}</td>
             <td>{{ funcionario.gaveta }}</td>
             <td>
@@ -35,18 +34,33 @@
             </td>
             <td>
                 <a href="{% url 'editar-funcionario' funcionario.pk %}" class="btn btn-warning btn-sm" title="Editar"><i class="fa-solid fa-pen-to-square"></i></a>
-                <a href="{% url 'excluir-funcionario' funcionario.pk %}" class="btn btn-warning btn-sm" title="Rastrear"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <button class="btn btn-warning btn-sm rastrear-btn" data-nome="{{ funcionario.nome }}" data-setor="{% for movimentacao in funcionario.movimentacao_set.all %}{{ movimentacao.setor }}{% empty %}{% endfor %}"><i class="fa-solid fa-magnifying-glass"></i></button>
             </td>
         </tr>
-
         {% empty %}
-
         <tr>
             <td colspan="8">Nenhum campo registrado</td>
         </tr>
-
         {% endfor %}
-
     </table>
 </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.rastrear-btn').click(function() {
+            var nome = $(this).data('nome');
+            var setor = $(this).data('setor');
+            
+            if (setor) {
+                var mensagem = 'A pasta de ' + nome + ' está no ' + setor;
+                alert(mensagem);
+            } else {
+                var mensagem = 'A pasta de ' + nome + ' está no arquivo';
+                alert(mensagem);
+            }
+        });
+    });
+</script>
 {% endblock %}

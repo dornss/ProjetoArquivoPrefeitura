@@ -3,13 +3,19 @@ import datetime
 
 # Create your models here.
 class Funcionario(models.Model):
+    VINCULO_CHOICES = (
+        ('C', 'Comissionado'),
+        ('CO', 'Contratado'),
+        ('CN', 'Concursado'),
+    )
+
     nome = models.CharField(max_length=50)
     matricula = models.CharField(max_length=6, verbose_name="Matrícula")
-    cpf = models.IntegerField(verbose_name="CPF")
-    vinculo = models.CharField(max_length=12, verbose_name="Vínculo")
+    cpf = models.IntegerField(max_length=11, verbose_name="CPF")
+    vinculo = models.CharField(max_length=12, verbose_name="Vínculo", choices=VINCULO_CHOICES)
     armario = models.IntegerField(verbose_name="Armário")
     gaveta = models.IntegerField(verbose_name="Gaveta")
-    situacao = models.BooleanField(default=True, verbose_name="Situação (Marcado = Ativo)")
+    situacao = models.BooleanField(default=True, help_text="Marcado para Ativo. ")
     
     def __str__(self):
         return "{} ({})".format(self.nome, self.matricula)

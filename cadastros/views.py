@@ -18,7 +18,7 @@ class MovimentacaoCreate(CreateView):
     model = Movimentacao
     fields = ['setor', 'data', 'funcionario']
     template_name = 'cadastros/form.html'
-    success_url = reverse_lazy('listar-funcionario')
+    success_url = reverse_lazy('listar-movimentacao')
 
 
 ############ UPDATE ############
@@ -33,7 +33,7 @@ class MovimentacaoUpdate(UpdateView):
      model = Movimentacao
      fields = fields = ['setor', 'data', 'funcionario']
      template_name = 'cadastros/form.html'
-     success_url = reverse_lazy('listar-funcionario')
+     success_url = reverse_lazy('listar-movimentacao')
 
 ############ DELETE ############
 
@@ -45,7 +45,7 @@ class FuncionarioDelete(DeleteView):
 class MovimentacaoDelete(DeleteView):
     model = Movimentacao
     template_name = 'cadastros/form-excluir.html'
-    success_url = reverse_lazy('listar-funcionario')
+    success_url = reverse_lazy('listar-movimentacao')
     
     
 ############ LIST ############

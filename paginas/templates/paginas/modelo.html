@@ -14,13 +14,19 @@
       integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
       crossorigin="anonymous"
     />
+    {% block css %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% endblock %}
     <link rel="shortcut icon" href="{%static 'img/favicon.ico'%}"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 
 </head>
 <body>
   <!-- sidebar -->
   <div class="main-container d-flex">
+    {% block sidebar %}
     <div class="sidebar" id="side-nav">
       <div class="header-box px-3 pt-3 pb-4">
           <h1 class="fs-4"><img src="{% static 'img/letreiro.png' %}" class="img-fluid pb-4 pt-4 mt-4 mb-4" alt="Home"></h1>
@@ -28,43 +34,54 @@
           
         <ul class="list-unstyled px-2">
           <li class="active"><a href="{% url 'listar-funcionario' %}" class="text-decoration-none px-3 py-3 d-block"><i class="fa-solid fa-house-user me-2"></i>Página principal</a></li>
+          {% if request.user.is_authenticated %}
           <li class=""><a href="{% url 'cadastrar-funcionario' %}" class="text-decoration-none px-3 py-3 d-block"><i class="fa-solid fa-user-plus me-2"></i>Novo Funcionário</a></li>
           <li class=""><a href="{% url 'listar-funcionario-delete' %}"class="text-decoration-none px-3 py-3 d-block"><i class="fa-solid fa-user-xmark me-2"></i>Del. Funcionário</a></li>
           <li class=""><a href="{% url 'cadastrar-movimentacao' %}" class="text-decoration-none px-3 py-3 d-block"><i class="fa-solid fa-folder me-2"></i>Saída pasta</a></li>
+          {% endif %}
           <li class=""><a href="{% url 'listar-movimentacao' %}" class="text-decoration-none px-3 py-3 d-block"><i class="fa-solid fa-folder-closed me-2"></i>Movimentações</a></li>
           <li class=""><a href="#" class="text-decoration-none px-3 py-3 d-block"><i class="fa-solid fa-circle-plus me-2"></i>Adicionar login</a></li>
         </ul>
         <hr class="h-color mx-1">
-
+        
+        {% if request.user.is_authenticated %}
         <div class="dropdown open">
           <button class="btn border-none dropdown-toggle text-white" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false">
-                <i class="fa fa-user"><span class="ms-2">User</span></i>
+                <i class="fa fa-user"><span class="ms-2">{{ request.user }}</span></i>
               </button>
           <div class="dropdown-menu" aria-labelledby="triggerId">
-            <button class="dropdown-item" href="#">Logout</button>
+            <button class="dropdown-item" onclick="logout()">Logout</button>
             <button class="dropdown-item" href="#">Alterar senha</button>
           </div>
         </div>
+        {% else %}
+        <button class="btn border-none text-white" type="button" id="triggerId" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-user"><span class="ms-2"><a href="{% url 'login' %}"></a>Login</span></i>
+        </button>
+        {% endif %}
 
       </div>
     </div>
+    {% endblock %}
 
     <div class="content">
       {% block navbar %}
       <nav class="navbar-nav navbar-light bg-light">
         <div class="container">
-          <div class="d-flex align-items-center">
-            <div class="input-group mx-3 my-3">
-              <input type="text" class="form-control" placeholder="Nome do Funcionário" aria-label="Recipient's username" aria-describedby="button-addon2">
-              <button class="btn btn-outline-secondary" type="button" id="button-addon2">Pesquisa</button>
+          <form action="?" method="GET">
+            <div class="d-flex align-items-center">
+              <div class="input-group mx-3 my-3">
+                <input type="text" class="form-control" placeholder="Nome do Funcionário" aria-label="Recipient's username" aria-describedby="button-addon2" name="nome" value="{{ request.GET.nome }}" autocomplete="off">
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Pesquisa</button>
+              </div>
+              <ul class="navbar-nav ms-3">
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket fs-3"></i></a>
+                </li>
+              </ul>
             </div>
-            <ul class="navbar-nav ms-3">
-              <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa-solid fa-right-from-bracket fs-3"></i></a>
-              </li>
-            </ul>
-          </div>
+          </form> 
         </div>
       </nav>
       {% endblock %}
@@ -77,6 +94,11 @@
       </div>
     </div>
   </div>
+  <script>
+    function logout() {
+      window.location.href = "logout/";
+    }
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/c70700e259.js" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>

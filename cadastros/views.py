@@ -1,3 +1,5 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 
@@ -5,16 +7,20 @@ from.models import Funcionario,Movimentacao
 
 from django.urls import reverse_lazy
 
-# Create your views here.
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class FuncionarioCreate(CreateView):
+class FuncionarioCreate(LoginRequiredMixin ,CreateView):
+    login_url = reverse_lazy('login')
     model = Funcionario
     fields = ['nome', 'matricula', 'cpf', 'vinculo', 'armario', 'gaveta', 'situacao']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-funcionario')
     
-class MovimentacaoCreate(CreateView):
+    
+    
+class MovimentacaoCreate(LoginRequiredMixin, CreateView):
+    login_url = reverse_lazy('login')
     model = Movimentacao
     fields = ['setor', 'data', 'funcionario']
     template_name = 'cadastros/form.html'
@@ -23,13 +29,15 @@ class MovimentacaoCreate(CreateView):
 
 ############ UPDATE ############
 
-class FuncionarioUpdate(UpdateView):
+class FuncionarioUpdate(LoginRequiredMixin, UpdateView):
+    login_url = reverse_lazy('login')
     model = Funcionario
     fields = ['nome', 'matricula', 'cpf', 'vinculo', 'armario', 'gaveta', 'situacao']
     template_name = 'cadastros/form.html'
     success_url = reverse_lazy('listar-funcionario')
     
-class MovimentacaoUpdate(UpdateView):
+class MovimentacaoUpdate(LoginRequiredMixin, UpdateView):
+     login_url = reverse_lazy('login')
      model = Movimentacao
      fields = fields = ['setor', 'data', 'funcionario']
      template_name = 'cadastros/form.html'
@@ -37,12 +45,14 @@ class MovimentacaoUpdate(UpdateView):
 
 ############ DELETE ############
 
-class FuncionarioDelete(DeleteView):
+class FuncionarioDelete(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
     model = Funcionario
     template_name = 'cadastros/form-excluir.html'
     success_url = reverse_lazy('listar-funcionario')
 
-class MovimentacaoDelete(DeleteView):
+class MovimentacaoDelete(LoginRequiredMixin, DeleteView):
+    login_url = reverse_lazy('login')
     model = Movimentacao
     template_name = 'cadastros/form-excluir.html'
     success_url = reverse_lazy('listar-movimentacao')
@@ -54,14 +64,32 @@ class FuncionarioList(ListView):
     model = Funcionario
     template_name = 'cadastros/listas/index.html'
     
-class FuncionarioDeleteList(ListView):
+    def get_queryset(self):
+        
+        txt_nome = self.request.GET.get('nome', '')
+        
+        funcionario = Funcionario.objects.filter(nome__icontains=txt_nome)
+        
+        return funcionario  
+    
+class FuncionarioDeleteList(LoginRequiredMixin, ListView):
+    login_url = reverse_lazy('login')
     model = Funcionario
     template_name = 'cadastros/listas/funcionario-delete.html'
+    
+    def get_queryset(self):
+        
+        txt_nome = self.request.GET.get('nome', '')
+        
+        funcionario = Funcionario.objects.filter(nome__icontains=txt_nome)
+        
+        return funcionario 
 
 
 class MovimentacaoList(ListView):
     model = Movimentacao
     template_name = 'cadastros/listas/movimentacao.html'
+    
      
 
 

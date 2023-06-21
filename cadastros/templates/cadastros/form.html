@@ -13,14 +13,18 @@
     Preencha todos os campos obrigatórios
 </p>
 <hr>
-<form action="" method="POST">
+<div class="row">
+    <div class="col-md- mx-auto">
+        <form action="" method="POST">
 
-    {% csrf_token %}
-
-    {{ form|crispy }}
-
-    <button type="submit" class="btn btn-primary">Cadastrar</button>
-
-
-</form>
+            {% csrf_token %}
+        
+            {{ form|crispy }}
+        
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        
+        
+        </form>
+    </div>
+</div>
 {% endblock %}

@@ -14,7 +14,7 @@ urlpatterns = [
     path('excluir/funcionario/<int:pk>/', FuncionarioDelete.as_view(), name="excluir-funcionario"),
     path('excluir/movimentacao/<int:pk>/', MovimentacaoDelete.as_view(), name="excluir-movimentacao"),
     
-    path('listar/funcionario/', FuncionarioList.as_view(), name="listar-funcionario"),
+    path('', FuncionarioList.as_view(), name="listar-funcionario"),
     path('listar/movimentacao/', MovimentacaoList.as_view(), name="listar-movimentacao"),
     
     path('listar/funcionario/delete', FuncionarioDeleteList.as_view(), name="listar-funcionario-delete"),

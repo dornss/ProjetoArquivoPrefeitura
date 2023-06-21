@@ -11,7 +11,7 @@ class Funcionario(models.Model):
 
     nome = models.CharField(max_length=50)
     matricula = models.CharField(max_length=6, verbose_name="Matrícula")
-    cpf = models.IntegerField(max_length=11, verbose_name="CPF")
+    cpf = models.IntegerField(verbose_name="CPF", max_length=11)
     vinculo = models.CharField(max_length=12, verbose_name="Vínculo", choices=VINCULO_CHOICES)
     armario = models.IntegerField(verbose_name="Armário")
     gaveta = models.IntegerField(verbose_name="Gaveta")

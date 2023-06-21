@@ -1,5 +1,0 @@
-django==2.2.12
-django-braces
-django-cleanup
-django-crispy-forms
-crispy-bootstrap5

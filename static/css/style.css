@@ -40,3 +40,9 @@ hr.h-color{
 footer{
     position: relative;
 }
+
+.btn-login-sidebar{
+    text-decoration: none;
+    color:#eee;
+    padding-left: 10px;
+}

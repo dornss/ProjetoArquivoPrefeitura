@@ -1,21 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 
-* {
-    margin: 0;
-    padding: none;
-    overflow: hidden;
-    box-sizing: border-box;
-    height: 100%;
-}
+
 
 body {
     background-image: url("/static/img/bg-igreja.png");
     background-size: cover;
-    background-position: center;
+    background-position:top;
     background-repeat: no-repeat;
     padding: none;
     margin: 0;
     font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
 }
 
 .footer {
@@ -23,9 +18,10 @@ body {
     background-size: 100% auto;
     background-repeat: no-repeat;
     box-sizing: border-box;
-    position: relative;
-    top: 14.8%;
+    position: absolute;
+    top:91%;
     height: 100px;
+    width: 100%;
 }
 
 
@@ -33,7 +29,7 @@ body {
     position: relative;
     width: 350px;
     height: 470px;
-    background-color: #1e1c84;
+    background-color: #141c84;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -75,6 +71,8 @@ body {
 }
 
 .container-bottom {
+    position: relative;
+    top:100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -87,6 +85,7 @@ body {
 .btn-entrar {
     position: absolute;
     left: 50%;
+    top: 130px;
     transform: translate(-50%);
     padding: 5px 10px;
     border-radius: 30px;
@@ -106,3 +105,52 @@ body {
     margin: 0;
     padding: 0;
 }
+
+.form{
+
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%)
+}
+
+#id_username,
+#id_password {
+    position: relative;
+    top: -35px;
+    width: 250px;
+    height: 20px;
+    margin-bottom: 30px;
+    margin-top: 5px;
+    padding: 5px;
+    padding-left: 15px;
+    padding-top: 18px;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid #fff;
+    background-color: transparent;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
+    outline: none;
+    color: #fff;
+  }
+  
+ #id_username{
+
+    background-image: url(../img/usericon.png);
+    background-repeat: no-repeat;
+    background-size: 10px;
+    background-position: 0.5% 70%;
+  }
+
+#id_password{
+
+    background-image: url(../img/cadeadoicon.png);
+    background-repeat: no-repeat;
+    background-size: 10px;
+    background-position: 0.5% 70%;
+    
+
+  }
+ 
